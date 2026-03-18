@@ -327,20 +327,113 @@ class GPXPreviewWidget(QWidget):
         painter.restore()
 
     def _draw_track(self, painter, draw_rect, bounds, entry):
-        """Zeichnet einen einzelnen Track in die Vorschau."""
+        """Zeichnet einen einzelnen Track in die Vorschau mit Richtungsampeln."""
         for segment in entry.track.segments:
             path = QPainterPath()
-            has_started = False
-            for point in segment.points:
+            
+            points = segment.points
+            
+            # Pfeil alle 10km auf der Karte (Haversine-Distanz)
+            arrow_distance_meters = 10000  # 10 km in Metern
+            
+            has_first_point = False
+            prev_x = None
+            prev_y = None
+            prev_lat = None
+            prev_lon = None
+            cumulative_dist_meters = 0.0
+            
+            for i, point in enumerate(points):
                 x, y = self._project_point(draw_rect, bounds, point.latitude, point.longitude)
-                if not has_started:
+                
+                # Tracklinie zeichnen
+                if not has_first_point:
                     path.moveTo(x, y)
-                    has_started = True
+                    has_first_point = True
                 else:
                     path.lineTo(x, y)
-
-            if has_started:
+                
+                # Distanz zum vorherigen Punkt berechnen (Haversine für Genauigkeit)
+                if prev_lat is not None and prev_lon is not None:
+                    segment_dist_meters = self._haversine_distance(
+                        point.latitude, point.longitude,
+                        prev_lat, prev_lon
+                    )
+                    cumulative_dist_meters += segment_dist_meters
+                    
+                    # Pfeil zeichnen wenn ~10km zurückgelegt wurden
+                    if cumulative_dist_meters >= arrow_distance_meters and i > 0:
+                        dx = x - prev_x
+                        dy = y - prev_y
+                        self._draw_arrow(painter, x, y, dx, dy, entry.color)
+                        cumulative_dist_meters -= arrow_distance_meters
+                
+                # Vorherige Position speichern
+                prev_lat = point.latitude
+                prev_lon = point.longitude
+                prev_x = x
+                prev_y = y
+                
+            if has_first_point:
                 painter.drawPath(path)
+    
+    def _haversine_distance(self, lat1, lon1, lat2, lon2):
+        """Berechnet die Distanz in Metern zwischen zwei geographischen Punkten."""
+        R = 6371000  # Erdradius in Metern
+        
+        lat1_rad = math.radians(lat1)
+        lat2_rad = math.radians(lat2)
+        delta_lat = math.radians(lat2 - lat1)
+        delta_lon = math.radians(lon2 - lon1)
+        
+        a = math.sin(delta_lat / 2) ** 2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(delta_lon / 2) ** 2
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        
+        return R * c
+    
+    def _draw_arrow(self, painter, x, y, dx, dy, color):
+        """Zeichnet einen kompakten Richtungs Pfeil an der gegebenen Position."""
+        arrow_size = 10.0  # Größe des Pfeils in Pixeln (größer)
+        
+        # Normalisierte Richtung (Einheitsvektor)
+        length = math.sqrt(dx * dx + dy * dy)
+        if length < 1e-6:
+            return  # Zu wenig Bewegung für einen Pfeil
+        
+        nx, ny = dx / length, dy / length
+        
+        # Flügelpositionen berechnen (senkrecht zur Bewegungsrichtung)
+        # Für Karten-Koordinaten: y ist nach unten gerichtet
+        wing_rx = -ny
+        wing_ry = nx
+        
+        # Flügelpositionen berechnen
+        wing_len = arrow_size * 0.5
+        wing1_x = x + wing_rx * wing_len
+        wing1_y = y + wing_ry * wing_len
+        wing2_x = x - wing_rx * wing_len
+        wing2_y = y - wing_ry * wing_len
+        
+        # Pfeilspitze berechnen (etwas weiter als die Flügel)
+        tip_dist = arrow_size * 0.75
+        tip_x = x + nx * tip_dist
+        tip_y = y + ny * tip_dist
+        
+        # Pfad für den Pfeil erstellen
+        arrow_path = QPainterPath()
+        arrow_path.moveTo(tip_x, tip_y)
+        arrow_path.lineTo(wing1_x, wing1_y)
+        arrow_path.lineTo(x, y)
+        arrow_path.lineTo(wing2_x, wing2_y)
+        arrow_path.closeSubpath()
+        
+        # Pfeil zeichnen mit Farbe des Tracks
+        painter.save()
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        painter.setBrush(QColor(color))
+        painter.setPen(Qt.PenStyle.NoPen)
+        painter.drawPath(arrow_path)
+        painter.restore()
 
 
 class GPXTrackManagerGUI(QMainWindow):

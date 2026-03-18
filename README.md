@@ -4,9 +4,13 @@ Desktop-Anwendung zum Sortieren, Prüfen und Zusammenführen von GPX-Tracks unte
 
 ## Download
 
-[Aktuelle EXE herunterladen](https://github.com/danielrausch82/GPX-Track-Merger/releases/download/v1.0.1/GPX-Track-Merger-1.0.1.exe)
+[Aktuelle EXE herunterladen (v1.0.2)](https://github.com/danielrausch82/GPX-Track-Merger/releases/download/v1.0.2/GPX-Track-Merger-1.0.2.exe)
 
 [Alle Releases ansehen](https://github.com/danielrausch82/GPX-Track-Merger/releases)
+
+## Changelog
+
+[Änderungen zwischen den Versionen ansehen (CHANGELOG.md)](CHANGELOG.md)
 
 ## Screenshot
 
@@ -61,10 +65,10 @@ Für einen lokalen Release-Build unter Windows kann PyInstaller verwendet werden
 ```powershell
 .\.venv\Scripts\Activate.ps1
 pip install pyinstaller
-pyinstaller --noconfirm --clean --onefile --windowed --name GPX-Track-Merger-1.0.1 main.py
+pyinstaller --noconfirm --clean --onefile --windowed --name GPX-Track-Merger-1.0.2 main.py
 ```
 
-Die fertige Datei liegt danach unter dist\GPX-Track-Merger-1.0.1.exe.
+Die fertige Datei liegt danach unter dist\GPX-Track-Merger-1.0.2.exe.
 
 ## Hinweise
 
