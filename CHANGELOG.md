@@ -12,7 +12,7 @@
 - Implementierung von `haversine_distance()` für präzise Entfernungsberechnung zwischen GPS-Punkten
 - Optimierung der Pfeilverteilung für gleichmäßige Sichtbarkeit auf der Karte
 
-## [1.0.1] - 2026-03-XX
+## [1.0.1] - 2026-03-17
 
 Überarbeitetes helles UI mit kompakterem Layout.
 Integrierte OSM-Vorschau für importierte Tracks.
