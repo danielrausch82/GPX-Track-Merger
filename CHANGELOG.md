@@ -14,4 +14,8 @@
 
 ## [1.0.1] - 2026-03-XX
 
-*(Vorherige Versionen sind hier dokumentiert)*
+Überarbeitetes helles UI mit kompakterem Layout.
+Integrierte OSM-Vorschau für importierte Tracks.
+Anzeige von Distanz und Höhenmetern pro Track und gesamt.
+Eindeutige Farblogik für Tracks bei importierten GPX-Farbdopplungen.
+Bereinigte Lösch- und Importdialoge.
