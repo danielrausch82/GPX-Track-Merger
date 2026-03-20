@@ -3,12 +3,13 @@
 ## [1.0.3] - 2026-03-20
 
 ### Features
-- Waypoints werden jetzt beim Import in der Liste angezeigt und in der Kartenansicht mit Garmin-aehnlichen Symbolen dargestellt.
-- Der Export uebernimmt Waypoints und benennt den zusammengefuehrten Track nach der Quelldatei ohne .gpx-Endung.
-- Neuer Ride-with-GPS-Helfer: oeffnet die Upload-Seite und legt die exportierte GPX-Datei im Ordner gpx-export neben der Anwendung ab.
+- GPX-Tracks und Waypoints werden gemeinsam importiert, in getrennten Listen angezeigt und in der Kartenansicht dargestellt.
+- Waypoints werden mit Garmin-aehnlichen Symbolen angezeigt; unbekannte GPX-Symbole erhalten ein generisches Fallback-Icon.
+- Der Export uebernimmt Waypoints und benennt den zusammengefuehrten Track standardmaessig nach der Quelldatei ohne Dateiendung.
+- Neuer Ride-with-GPS-Helfer: exportiert nach gpx-export, oeffnet die Upload-Seite und kopiert den Dateinamen in die Zwischenablage.
 
 ### Technical
-- Vollstaendige Garmin-GIF-Symbolsammlung in assets/waypoints integriert und die Symbolzuordnung verbessert.
+- Vollstaendige Garmin-GIF-Symbolsammlung in assets/waypoints integriert und die Symbolzuordnung fuer GPX-Symbole verbessert.
 - Gemeinsame GPX-Exportlogik fuer Datei-Export und Ride-with-GPS-Vorbereitung eingefuehrt.
 - Build- und Versionsmetadaten auf 1.0.3 aktualisiert.
 
