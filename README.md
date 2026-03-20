@@ -4,7 +4,7 @@ Desktop-Anwendung zum Sortieren, Prüfen und Zusammenführen von GPX-Tracks unte
 
 ## Download
 
-[Aktuelle EXE herunterladen (v1.0.2)](https://github.com/danielrausch82/GPX-Track-Merger/releases/download/v1.0.2/GPX-Track-Merger-1.0.2.exe)
+[Aktuelle EXE herunterladen (v1.0.3)](https://github.com/danielrausch82/GPX-Track-Merger/releases/download/v1.0.3/GPX-Track-Merger-1.0.3.exe)
 
 [Alle Releases ansehen](https://github.com/danielrausch82/GPX-Track-Merger/releases)
 
@@ -41,7 +41,7 @@ Desktop-Anwendung zum Sortieren, Prüfen und Zusammenführen von GPX-Tracks unte
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install PyQt6 gpxpy
+pip install -r requirements.txt
 ```
 
 ## Anwendung starten
@@ -64,11 +64,11 @@ Für einen lokalen Release-Build unter Windows kann PyInstaller verwendet werden
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
-pip install pyinstaller
-pyinstaller --noconfirm --clean --onefile --windowed --name GPX-Track-Merger-1.0.2 main.py
+pip install -r requirements.txt
+pyinstaller --noconfirm --clean .\GPX-Track-Merger-1.0.3.spec
 ```
 
-Die fertige Datei liegt danach unter dist\GPX-Track-Merger-1.0.2.exe.
+Die fertige Datei liegt danach unter dist\GPX-Track-Merger-1.0.3.exe.
 
 ## Hinweise
 
@@ -93,11 +93,11 @@ Prüfen, ob die GPX-Datei gültig ist und ob PyQt6 sowie gpxpy installiert sind.
 ### Kein Modul gefunden
 
 ```powershell
-pip install PyQt6 gpxpy
+pip install -r requirements.txt
 ```
 
 ### EXE-Build fehlt
 
 ```powershell
-pip install pyinstaller
+pip install -r requirements.txt
 ```

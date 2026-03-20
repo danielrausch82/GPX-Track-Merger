@@ -8,6 +8,7 @@ a = Analysis(
     datas=[
         ('assets\\gpx-track-merger.ico', 'assets'),
         ('assets\\gpx-track-merger.png', 'assets'),
+        ('assets\\waypoints', 'assets\\waypoints'),
     ],
     hiddenimports=[],
     hookspath=[],
@@ -25,7 +26,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='GPX-Track-Merger-1.0.2',
+    name='GPX-Track-Merger-1.0.3',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,4 +40,5 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=['assets\\gpx-track-merger.ico'],
+    version='version_info.txt',
 )

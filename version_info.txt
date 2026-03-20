@@ -1,0 +1,29 @@
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 3, 0),
+    prodvers=(1, 0, 3, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo([
+      StringTable(
+        '040704B0',
+        [
+          StringStruct('CompanyName', 'ERPstudio'),
+          StringStruct('FileDescription', 'GPX Track Merger fuer Windows'),
+          StringStruct('FileVersion', '1.0.3'),
+          StringStruct('InternalName', 'GPX-Track-Merger'),
+          StringStruct('OriginalFilename', 'GPX-Track-Merger-1.0.3.exe'),
+          StringStruct('ProductName', 'GPX Track Merger'),
+          StringStruct('ProductVersion', '1.0.3')
+        ]
+      )
+    ]),
+    VarFileInfo([VarStruct('Translation', [1031, 1200])])
+  ]
+)
